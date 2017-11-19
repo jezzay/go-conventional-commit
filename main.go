@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/jezzay/go-conventional-commit/parse"
+	"gitlab.com/jezzay/go-conventional-commit/parse"
 )
 
 func main() {
