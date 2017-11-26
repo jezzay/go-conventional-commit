@@ -1,4 +1,4 @@
-package main
+package go_conventional_commit
 
 import (
 	"fmt"
