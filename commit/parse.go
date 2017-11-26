@@ -24,7 +24,7 @@ func Parse(c string) Parsed {
 		header := parseHeader(lines[0])
 		body := strings.Join(lines[1:], "")
 
-		notesRegex := regexp.MustCompile(`^[\s|*]*(BREAKING CHANGE)[:\s]+(.*)`)
+		notesRegex := regexp.MustCompile(`^(?i)[\s|*]*(BREAKING CHANGE)[:\s]+(.*)`)
 		notes := make([]Note, 0, 1)
 
 		for _, l := range lines[1:] {

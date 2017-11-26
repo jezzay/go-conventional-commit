@@ -22,6 +22,16 @@ BREAKING CHANGE: A new breaking change`
 	}
 }
 
+func TestParseCommitWithNoteInLowercase(t *testing.T) {
+	commit := `feat: add new feature
+Description of the new feature
+breaking change: A new breaking change`
+	parsedCommit := Parse(commit)
+	if len(parsedCommit.notes) != 1 {
+		t.Errorf(`Expected len(parsedCommit.Notes) to equal %v got %v`, 1, parsedCommit.notes)
+	}
+}
+
 func TestParseCommitWithNoteTitle(t *testing.T) {
 	commit := `feat: add new feature
 Description of the new feature
