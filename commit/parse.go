@@ -13,7 +13,6 @@ import (
 
 type Parsed struct {
 	header      Header
-	description string
 	body        string
 }
 
@@ -33,7 +32,9 @@ func Parse(c string) Parsed {
 	if len(lines) > 1 {
 		header := parseHeader(lines[0])
 		fmt.Printf("Parsed commit message with body = \n%v\n", header)
-		return Parsed{header, "", ""}
+		strings := lines[1:]
+		// TODO: figure out how to concatenate all the remaining lines into a single string.
+		return Parsed{header, ""}
 	}
 	return Parsed{}
 }
