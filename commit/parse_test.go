@@ -72,3 +72,24 @@ func TestParseCommitWithOutBody(t *testing.T) {
 		t.Errorf(`Expected parsedCommit.body to equal %v got %v`, expected, parsedCommit.body)
 	}
 }
+
+func TestParseCommitFooter(t *testing.T)  {
+	commit := `feat: add new feature
+Description of the new feature
+
+BREAKING CHANGE: A new breaking change
+Details on the breaking change
+
+Closes #42`
+
+	parsedCommit := Parse(commit)
+	expected := `BREAKING CHANGE: A new breaking change
+Details on the breaking change
+
+Closes #42`
+
+	if parsedCommit.footer != expected {
+		t.Errorf(`Expected parsedCommit.footer to equal %v got %v`, expected, parsedCommit.footer)
+	}
+
+}
