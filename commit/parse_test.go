@@ -47,6 +47,23 @@ BREAKING CHANGE: A new breaking change`
 	}
 }
 
+func TestParseCommitWithNoteOnNewLine(t *testing.T) {
+	commit := `feat: add new feature
+Description of the new feature
+BREAKING CHANGE:
+A new breaking change on a new line`
+	parsedCommit := Parse(commit)
+	if len(parsedCommit.notes) == 1 {
+		note := parsedCommit.notes[0]
+		expected := "A new breaking change on a new line"
+		if note.text != expected {
+			t.Errorf(`Expected parsedCommit.Notes[0].text to equal %v got %v`, expected, note.title)
+		}
+	} else {
+		t.Error("Expected one Note")
+	}
+}
+
 func TestParseCommitWithOutBody(t *testing.T) {
 	commit := `feat: add new feature`
 	parsedCommit := Parse(commit)

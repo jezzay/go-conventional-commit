@@ -1,3 +1,3 @@
 # go-conventional-commit
 
-WIP 
+WIP experimental parser for the conventional commit specification

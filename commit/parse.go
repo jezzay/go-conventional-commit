@@ -27,15 +27,25 @@ func Parse(c string) Parsed {
 		notesRegex := regexp.MustCompile(`^(?i)[\s|*]*(BREAKING CHANGE)[:\s]+(.*)`)
 		notes := make([]Note, 0, 1)
 
+		continueNote := false
 		for _, l := range lines[1:] {
 			if notesRegex.MatchString(l) {
 				matches := notesRegex.FindAllStringSubmatch(l, -1)
 				if len(matches) == 1 {
+					continueNote = true
 					parts := matches[0]
 					note := Note{parts[1], parts[2]}
 					notes = append(notes, note)
+					continue
 				}
 			}
+			if continueNote {
+				previousNote := len(notes) - 1
+				notes[previousNote].text = notes[previousNote].text + l
+				continue
+			//	footer = append(footer, line);
+			}
+
 		}
 		return Parsed{header, body, notes}
 	}
