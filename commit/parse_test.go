@@ -12,6 +12,34 @@ Description of the new feature`
 	}
 }
 
+func TestParseCommitWithMultiLineBody(t *testing.T) {
+	commit := `feat: add new feature
+Description of the new feature
+more details
+even more details`
+	parsedCommit := Parse(commit)
+	expected := `Description of the new feature
+more details
+even more details`
+	if parsedCommit.body != expected {
+		t.Errorf("Expected parsedCommit.body to equal \n%v \n\ngot:\n\n%v", expected, parsedCommit.body)
+	}
+}
+
+func TestParseCommitBodyExcludesFooter(t *testing.T) {
+	commit := `feat: add new feature
+Description of the new feature
+more details
+BREAKING CHANGE: A new breaking change
+Closes #1`
+	parsedCommit := Parse(commit)
+	expected := `Description of the new feature
+more details`
+	if parsedCommit.body != expected {
+		t.Errorf("Expected parsedCommit.body to equal \n%v \n\ngot:\n\n%v", expected, parsedCommit.body)
+	}
+}
+
 func TestParseCommitWithNote(t *testing.T) {
 	commit := `feat: add new feature
 Description of the new feature
