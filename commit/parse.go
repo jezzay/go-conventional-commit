@@ -26,7 +26,6 @@ func Parse(c string) Parsed {
 	isBody := true
 	if len(lines) >= 1 {
 		header := parseHeader(lines[0])
-		//body = strings.Join(lines[1:], "")
 		notesRegex := regexp.MustCompile(`^(?i)[\s|*]*(BREAKING CHANGE)[:\s]+(.*)`)
 		notes := make([]Note, 0, 1)
 
@@ -50,7 +49,6 @@ func Parse(c string) Parsed {
 				notes[previousNote].text = notes[previousNote].text + l
 				footer = appendLine(footer, l)
 				continue
-				//	footer = append(footer, line);
 			}
 			if isBody {
 				body = appendLine(body, l)
