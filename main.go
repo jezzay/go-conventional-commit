@@ -1,26 +1,24 @@
-package go_conventional_commit
+package main
 
 import (
 	"fmt"
 
-	"gitlab.com/jezzay/go-conventional-commit/commit"
+	"github.com/jezzay/go-conventional-commit/commit"
 )
 
 func main() {
-	//message := commit.Parse(`feat: add new feature`)
 
-	//fmt.Printf("Parsed commit message = %v \n", message)
+	// Example commit message; commit.Parse will return the different parts of the commit message
 
-	commitWithBody :=
+	commitMsg :=
 		`feat: add new feature
+Description of the new feature
 
-Commit message body`
-		//
-		//	// TODO: look at how conventional commit parser parses commit messages for inspiration.
-		//
-	message := commit.Parse(commitWithBody)
-	fmt.Printf("Parsed commit message with body = \n%+v\n", message)
-	//
-	//	message = commit.Parse("feat add new feature")
-	//	fmt.Printf("Invalid commit message = %v \n", message)
+BREAKING CHANGE: A new breaking change
+Details on the breaking change
+
+Closes #42`
+	message := commit.Parse(commitMsg)
+
+	fmt.Printf("Parsed commit = \n%+v\n", message)
 }
